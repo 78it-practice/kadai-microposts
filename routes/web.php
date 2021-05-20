@@ -14,3 +14,7 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+//ユーザ登録 ->name()でルーティングに名前を付けている
+Route::get('signup', 'Auth\RegisterController@showRegistrationForm')->name('signup.get');
+Route::post('signup', 'Auth\RegisterController@register')->name('signup.post');
