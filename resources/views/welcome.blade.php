@@ -1,7 +1,24 @@
 @extends('layouts.app')
 @section('content')
   @if(Auth::check())
-    <h2>{{ Auth::user()->name }}</h2>
+    <div class="row">
+      <aside class="col-sm-4">
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">{{ Auth::user()->name }}</h3>
+          </div>
+          <div class="card-body">
+            <img src="{{ Gravatar::get(Auth::user()->email, ['size' => 500]) }}" alt="" class="rounded img-fluid">
+          </div>
+        </div>
+      </aside>
+      <div class="col-sm-8">
+        {{-- 投稿フォーム --}}
+        @include('microposts.form')
+        {{-- 投稿一覧 --}}
+        @include('microposts.microposts')
+      </div>
+    </div>
   @else
     <div clsas="center jumbotron">
       <div class="text-center">
