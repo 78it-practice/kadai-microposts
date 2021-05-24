@@ -53,4 +53,17 @@ class UsersController extends Controller
             'users' => $followers
         ]);
     }
+    
+    //お気に入り一覧ページを表示
+    public function favorites($id)
+    {
+        $user = User::findOrFail($id);
+        $user->loadRelationshipCounts();
+        $favorites = $user->favorites()->paginate(10);
+        
+        return view('users.favorites', [
+            'user' => $user,
+            'microposts' => $favorites
+        ]);
+    }
 }
